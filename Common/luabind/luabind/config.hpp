@@ -26,13 +26,15 @@
 
 #include <boost/config.hpp>
 
-#ifdef BOOST_MSVC
+#define IS_MSVC (_MSC_VER && !__INTEL_COMPILER)
+
+#if IS_MSVC
 	#define LUABIND_ANONYMOUS_FIX static
 #else
 	#define LUABIND_ANONYMOUS_FIX
 #endif
 
-#if defined (BOOST_MSVC) && (BOOST_MSVC <= 1200)
+#if defined (IS_MSVC) && (_MSC_VER <= 1200)
 
 #define for if (false) {} else for
 
@@ -48,7 +50,7 @@ namespace std
 #endif
 
 
-#if defined (BOOST_MSVC) && (BOOST_MSVC <= 1300)
+#if defined (_MSC_VER) && (_MSC_VER <= 1300)
 	#define LUABIND_MSVC_TYPENAME
 #else
 	#define LUABIND_MSVC_TYPENAME typename
